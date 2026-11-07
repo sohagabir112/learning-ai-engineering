@@ -10,6 +10,7 @@ The current material is organized as a Week 1 learning series:
 - **Day 2:** Use system prompts and adjust model temperature.
 - **Day 3:** Inspect prompt, completion, and total token usage.
 - **Day 4:** Request structured JSON output and validate it with Pydantic.
+- **Day 5:** Parse resumes and score candidates against a job description.
 
 Each day is an independent Python project with its own `pyproject.toml` and `uv.lock` file.
 
@@ -41,7 +42,7 @@ cd week1/day1
 uv sync
 ```
 
-Repeat the `uv sync` command from `week1/day2`, `week1/day3`, or `week1/day4` when working on another lesson.
+Repeat the `uv sync` command from the directory of the lesson you want to run.
 
 ## Running the examples
 
@@ -54,7 +55,16 @@ uv run python week1/day3/tokens.py
 uv run python week1/day4/json_pydantic.py
 ```
 
-Because each day has its own environment, you can also run a script after changing into its directory:
+Day 5 requires PDF or DOCX resumes in `week1/day5/reumse` and a local
+`.env` file containing `GROQ_API_KEY`:
+
+```bash
+cd week1/day5
+uv sync
+uv run python resume_parsered.py
+```
+
+Because each day has its own environment, you can also run any script after changing into its directory:
 
 ```bash
 cd week1/day1
@@ -77,8 +87,13 @@ uv run python hello_llm.py
     ├── day3
     │   ├── tokens.py
     │   └── pyproject.toml
-    └── day4
-        ├── json_pydantic.py
+    ├── day4
+    │   ├── json_pydantic.py
+    │   └── pyproject.toml
+    └── day5
+        ├── resume_parsered.py
+        ├── reumse/
+        ├── README.md
         └── pyproject.toml
 ```
 
