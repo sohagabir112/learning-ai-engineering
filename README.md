@@ -18,6 +18,8 @@ The learning material is organized into weekly lessons.
 
 - **Day 6:** Use structured prompts to classify customer complaints with an
   LLM.
+- **Day 7:** Build a ReAct-style shopping agent that uses price lookup and
+  calculator tools.
 
 Each day is an independent Python project with its own `pyproject.toml` and `uv.lock` file.
 
@@ -61,6 +63,7 @@ uv run python week1/day2/sys_temp.py
 uv run python week1/day3/tokens.py
 uv run python week1/day4/json_pydantic.py
 uv run python week2/day6/prompt_engineering.py
+uv run python week2/day7/react_chain.py
 ```
 
 Day 5 requires PDF or DOCX resumes in `week1/day5/reumse` and a local
@@ -79,6 +82,14 @@ prompt:
 cd week2/day6
 uv sync
 uv run python prompt_engineering.py
+```
+
+Day 7 demonstrates a ReAct-style shopping agent:
+
+```bash
+cd week2/day7
+uv sync
+uv run python react_chain.py
 ```
 
 Because each day has its own environment, you can also run any script after changing into its directory:
@@ -113,8 +124,13 @@ uv run python hello_llm.py
 │       ├── README.md
 │       └── pyproject.toml
 └── week2
-    └── day6
-        ├── prompt_engineering.py
+    ├── day6
+    │   ├── prompt_engineering.py
+    │   ├── README.md
+    │   ├── pyproject.toml
+    │   └── uv.lock
+    └── day7
+        ├── react_chain.py
         ├── README.md
         ├── pyproject.toml
         └── uv.lock
