@@ -4,13 +4,20 @@ A hands-on learning repository for building AI applications with Python and the 
 
 ## What this repository covers
 
-The current material is organized as a Week 1 learning series:
+The learning material is organized into weekly lessons.
+
+### Week 1
 
 - **Day 1:** Make a basic chat completion request.
 - **Day 2:** Use system prompts and adjust model temperature.
 - **Day 3:** Inspect prompt, completion, and total token usage.
 - **Day 4:** Request structured JSON output and validate it with Pydantic.
 - **Day 5:** Parse resumes and score candidates against a job description.
+
+### Week 2
+
+- **Day 6:** Use structured prompts to classify customer complaints with an
+  LLM.
 
 Each day is an independent Python project with its own `pyproject.toml` and `uv.lock` file.
 
@@ -53,6 +60,7 @@ uv run python week1/day1/hello_llm.py
 uv run python week1/day2/sys_temp.py
 uv run python week1/day3/tokens.py
 uv run python week1/day4/json_pydantic.py
+uv run python week2/day6/prompt_engineering.py
 ```
 
 Day 5 requires PDF or DOCX resumes in `week1/day5/reumse` and a local
@@ -62,6 +70,15 @@ Day 5 requires PDF or DOCX resumes in `week1/day5/reumse` and a local
 cd week1/day5
 uv sync
 uv run python resume_parsered.py
+```
+
+Day 6 demonstrates prompt engineering with a structured complaint-classification
+prompt:
+
+```bash
+cd week2/day6
+uv sync
+uv run python prompt_engineering.py
 ```
 
 Because each day has its own environment, you can also run any script after changing into its directory:
@@ -77,24 +94,30 @@ uv run python hello_llm.py
 .
 ├── README.md
 ├── .gitignore
-└── week1
-    ├── day1
-    │   ├── hello_llm.py
-    │   └── pyproject.toml
-    ├── day2
-    │   ├── sys_temp.py
-    │   └── pyproject.toml
-    ├── day3
-    │   ├── tokens.py
-    │   └── pyproject.toml
-    ├── day4
-    │   ├── json_pydantic.py
-    │   └── pyproject.toml
-    └── day5
-        ├── resume_parsered.py
-        ├── reumse/
+├── week1
+│   ├── day1
+│   │   ├── hello_llm.py
+│   │   └── pyproject.toml
+│   ├── day2
+│   │   ├── sys_temp.py
+│   │   └── pyproject.toml
+│   ├── day3
+│   │   ├── tokens.py
+│   │   └── pyproject.toml
+│   ├── day4
+│   │   ├── json_pydantic.py
+│   │   └── pyproject.toml
+│   └── day5
+│       ├── resume_parsered.py
+│       ├── reumse/
+│       ├── README.md
+│       └── pyproject.toml
+└── week2
+    └── day6
+        ├── prompt_engineering.py
         ├── README.md
-        └── pyproject.toml
+        ├── pyproject.toml
+        └── uv.lock
 ```
 
 ## Security
