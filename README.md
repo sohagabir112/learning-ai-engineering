@@ -22,6 +22,7 @@ The learning material is organized into weekly lessons.
   calculator tools.
 - **Day 8:** Chain multiple LLM calls to extract resume and job-description
   skills, then score the candidate's fit.
+- **Day 9:** Stream chat-completion responses from the Groq API.
 
 Each day is an independent Python project with its own `pyproject.toml` and `uv.lock` file.
 
@@ -67,6 +68,7 @@ uv run python week1/day4/json_pydantic.py
 uv run python week2/day6/prompt_engineering.py
 uv run python week2/day7/react_chain.py
 uv run python week2/day8/prompt_chaining.py
+uv run python week2/day9/streaming.py
 ```
 
 Day 5 requires PDF or DOCX resumes in `week1/day5/reumse` and a local
@@ -107,6 +109,17 @@ The script makes three sequential Groq API calls: it extracts candidate
 skills, extracts job requirements, and compares the two lists to produce a
 match score and fit verdict.
 
+Day 9 demonstrates streaming responses from a chat completion:
+
+```bash
+cd week2/day9
+uv sync
+uv run python streaming.py
+```
+
+The script prints the model response as it arrives by passing `stream=True` to
+`client.chat.completions.create`.
+
 Because each day has its own environment, you can also run any script after changing into its directory:
 
 ```bash
@@ -145,12 +158,17 @@ uv run python hello_llm.py
     │   ├── pyproject.toml
     │   └── uv.lock
     ├── day7
-        ├── react_chain.py
-        ├── README.md
-        ├── pyproject.toml
-        └── uv.lock
-    └── day8
-        ├── prompt_chaining.py
+    │   ├── react_chain.py
+    │   ├── README.md
+    │   ├── pyproject.toml
+    │   └── uv.lock
+    ├── day8
+    │   ├── prompt_chaining.py
+    │   ├── README.md
+    │   ├── pyproject.toml
+    │   └── uv.lock
+    └── day9
+        ├── streaming.py
         ├── README.md
         ├── pyproject.toml
         └── uv.lock
