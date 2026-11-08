@@ -20,6 +20,8 @@ The learning material is organized into weekly lessons.
   LLM.
 - **Day 7:** Build a ReAct-style shopping agent that uses price lookup and
   calculator tools.
+- **Day 8:** Chain multiple LLM calls to extract resume and job-description
+  skills, then score the candidate's fit.
 
 Each day is an independent Python project with its own `pyproject.toml` and `uv.lock` file.
 
@@ -64,6 +66,7 @@ uv run python week1/day3/tokens.py
 uv run python week1/day4/json_pydantic.py
 uv run python week2/day6/prompt_engineering.py
 uv run python week2/day7/react_chain.py
+uv run python week2/day8/prompt_chaining.py
 ```
 
 Day 5 requires PDF or DOCX resumes in `week1/day5/reumse` and a local
@@ -91,6 +94,18 @@ cd week2/day7
 uv sync
 uv run python react_chain.py
 ```
+
+Day 8 demonstrates prompt chaining for resume-to-job matching:
+
+```bash
+cd week2/day8
+uv sync
+uv run python prompt_chaining.py
+```
+
+The script makes three sequential Groq API calls: it extracts candidate
+skills, extracts job requirements, and compares the two lists to produce a
+match score and fit verdict.
 
 Because each day has its own environment, you can also run any script after changing into its directory:
 
@@ -129,8 +144,13 @@ uv run python hello_llm.py
     │   ├── README.md
     │   ├── pyproject.toml
     │   └── uv.lock
-    └── day7
+    ├── day7
         ├── react_chain.py
+        ├── README.md
+        ├── pyproject.toml
+        └── uv.lock
+    └── day8
+        ├── prompt_chaining.py
         ├── README.md
         ├── pyproject.toml
         └── uv.lock
