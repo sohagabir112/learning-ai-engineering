@@ -23,6 +23,8 @@ The learning material is organized into weekly lessons.
 - **Day 8:** Chain multiple LLM calls to extract resume and job-description
   skills, then score the candidate's fit.
 - **Day 9:** Stream chat-completion responses from the Groq API.
+- **HireMeAI:** Build a full-stack resume assistant with a FastAPI backend,
+  Groq-powered resume parsing, and a React dashboard.
 
 Each day is an independent Python project with its own `pyproject.toml` and `uv.lock` file.
 
@@ -120,6 +122,31 @@ uv run python streaming.py
 The script prints the model response as it arrives by passing `stream=True` to
 `client.chat.completions.create`.
 
+### HireMeAI resume assistant
+
+HireMeAI is a full-stack project in `week2/hiremeai`. It parses the bundled
+resume PDF with Groq, displays the candidate profile in a React dashboard, and
+provides an AI assistant for resume-based questions.
+
+Start the backend from the project directory:
+
+```bash
+cd week2/hiremeai
+uv sync
+uv run uvicorn backend.main:app --reload
+```
+
+In a second terminal, start the frontend:
+
+```bash
+cd week2/hiremeai/frontend
+npm install
+npm run dev
+```
+
+Open `http://localhost:5173`. The backend API documentation is available at
+`http://127.0.0.1:8000/docs`.
+
 Because each day has its own environment, you can also run any script after changing into its directory:
 
 ```bash
@@ -167,8 +194,18 @@ uv run python hello_llm.py
     │   ├── README.md
     │   ├── pyproject.toml
     │   └── uv.lock
-    └── day9
+    ├── day9
         ├── streaming.py
+        ├── README.md
+        ├── pyproject.toml
+        └── uv.lock
+    └── hiremeai
+        ├── backend
+        │   └── main.py
+        ├── frontend
+        │   ├── index.html
+        │   ├── package.json
+        │   └── src
         ├── README.md
         ├── pyproject.toml
         └── uv.lock

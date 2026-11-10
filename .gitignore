@@ -46,6 +46,11 @@ htmlcov/
 .env.*
 !.env.example
 
+# Node / frontend
+node_modules/
+dist/
+*.log
+
 # Jupyter
 .ipynb_checkpoints/
 
