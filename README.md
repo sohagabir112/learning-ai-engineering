@@ -26,6 +26,9 @@ The learning material is organized into weekly lessons.
 - **HireMeAI:** Build a full-stack resume assistant with a FastAPI backend,
   Groq-powered resume parsing, and a React dashboard.
 
+- **Week 3, Day 11:** Build a small retrieval-augmented generation (RAG)
+  example with an in-memory knowledge base and Groq.
+
 Each day is an independent Python project with its own `pyproject.toml` and `uv.lock` file.
 
 ## Requirements
@@ -71,6 +74,7 @@ uv run python week2/day6/prompt_engineering.py
 uv run python week2/day7/react_chain.py
 uv run python week2/day8/prompt_chaining.py
 uv run python week2/day9/streaming.py
+uv run python week3/day11/rag.py
 ```
 
 Day 5 requires PDF or DOCX resumes in `week1/day5/reumse` and a local
@@ -121,6 +125,22 @@ uv run python streaming.py
 
 The script prints the model response as it arrives by passing `stream=True` to
 `client.chat.completions.create`.
+
+### Week 3, Day 11: RAG
+
+The day 11 example retrieves matching information from a small knowledge base
+before sending the question and context to the Groq chat-completion API. Run it
+from the lesson directory:
+
+```bash
+cd week3/day11
+uv sync
+uv run python rag.py
+```
+
+The example uses the `openai/gpt-oss-120b` model and prints a one-line answer
+to the question defined in `rag.py`. Update `knowledge_base` or `question` to
+experiment with other retrieval cases.
 
 ### HireMeAI resume assistant
 
@@ -178,7 +198,7 @@ uv run python hello_llm.py
 │       ├── reumse/
 │       ├── README.md
 │       └── pyproject.toml
-└── week2
+├── week2
     ├── day6
     │   ├── prompt_engineering.py
     │   ├── README.md
@@ -195,10 +215,10 @@ uv run python hello_llm.py
     │   ├── pyproject.toml
     │   └── uv.lock
     ├── day9
-        ├── streaming.py
-        ├── README.md
-        ├── pyproject.toml
-        └── uv.lock
+    │   ├── streaming.py
+    │   ├── README.md
+    │   ├── pyproject.toml
+    │   └── uv.lock
     └── hiremeai
         ├── backend
         │   └── main.py
@@ -206,6 +226,12 @@ uv run python hello_llm.py
         │   ├── index.html
         │   ├── package.json
         │   └── src
+        ├── README.md
+        ├── pyproject.toml
+        └── uv.lock
+└── week3
+    └── day11
+        ├── rag.py
         ├── README.md
         ├── pyproject.toml
         └── uv.lock
