@@ -28,6 +28,8 @@ The learning material is organized into weekly lessons.
 
 - **Week 3, Day 11:** Build a small retrieval-augmented generation (RAG)
   example with an in-memory knowledge base and Groq.
+- **Week 3, Day 12:** Generate sentence embeddings and compare text similarity
+  with cosine similarity.
 
 Each day is an independent Python project with its own `pyproject.toml` and `uv.lock` file.
 
@@ -142,6 +144,30 @@ The example uses the `openai/gpt-oss-120b` model and prints a one-line answer
 to the question defined in `rag.py`. Update `knowledge_base` or `question` to
 experiment with other retrieval cases.
 
+### Week 3, Day 12: Embeddings
+
+The day 12 example uses the `all-MiniLM-L6-v2` Sentence Transformers model to
+generate embeddings for two sentences and calculate their cosine similarity.
+Run it from the lesson directory so `uv` uses the project's dependencies:
+
+```bash
+cd week3/day12
+uv sync
+uv run python embed.py
+```
+
+You can also activate the project's virtual environment before using `python`
+directly:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+python .\embed.py
+```
+
+The first run downloads the embedding model from Hugging Face. On Windows,
+using `uv run` or the activated `.venv` is important because a system Python
+installation may not have NumPy or the other project dependencies installed.
+
 ### HireMeAI resume assistant
 
 HireMeAI is a full-stack project in `week2/hiremeai`. It parses the bundled
@@ -230,8 +256,13 @@ uv run python hello_llm.py
         ├── pyproject.toml
         └── uv.lock
 └── week3
-    └── day11
-        ├── rag.py
+    ├── day11
+    │   ├── rag.py
+    │   ├── README.md
+    │   ├── pyproject.toml
+    │   └── uv.lock
+    └── day12
+        ├── embed.py
         ├── README.md
         ├── pyproject.toml
         └── uv.lock
