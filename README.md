@@ -30,6 +30,9 @@ The learning material is organized into weekly lessons.
   example with an in-memory knowledge base and Groq.
 - **Week 3, Day 12:** Generate sentence embeddings and compare text similarity
   with cosine similarity.
+- **Week 3, Day 13:** Build a semantic-search RAG example that retrieves the
+  most relevant employee-policy document and sends it to Groq with the user's
+  question.
 
 Each day is an independent Python project with its own `pyproject.toml` and `uv.lock` file.
 
@@ -77,6 +80,7 @@ uv run python week2/day7/react_chain.py
 uv run python week2/day8/prompt_chaining.py
 uv run python week2/day9/streaming.py
 uv run python week3/day11/rag.py
+uv run python week3/day13/fullRag.py
 ```
 
 Day 5 requires PDF or DOCX resumes in `week1/day5/reumse` and a local
@@ -167,6 +171,25 @@ python .\embed.py
 The first run downloads the embedding model from Hugging Face. On Windows,
 using `uv run` or the activated `.venv` is important because a system Python
 installation may not have NumPy or the other project dependencies installed.
+
+### Week 3, Day 13: Semantic-search RAG
+
+The day 13 example embeds a small set of employee-policy documents with
+`all-MiniLM-L6-v2`, compares the question embedding with each document using
+cosine similarity, and retrieves the highest-scoring document. The retrieved
+document is then included in the Groq prompt so the answer is grounded in the
+matching policy.
+
+Run it from the lesson directory:
+
+```bash
+cd week3/day13
+uv sync
+uv run python fullRag.py
+```
+
+The first run downloads the embedding model from Hugging Face. The script also
+requires `GROQ_API_KEY` in `week3/day13/.env`.
 
 ### HireMeAI resume assistant
 
@@ -261,8 +284,13 @@ uv run python hello_llm.py
     │   ├── README.md
     │   ├── pyproject.toml
     │   └── uv.lock
-    └── day12
-        ├── embed.py
+    ├── day12
+    │   ├── embed.py
+    │   ├── README.md
+    │   ├── pyproject.toml
+    │   └── uv.lock
+    └── day13
+        ├── fullRag.py
         ├── README.md
         ├── pyproject.toml
         └── uv.lock
