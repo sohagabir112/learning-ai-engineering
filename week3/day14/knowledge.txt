@@ -1,0 +1,6 @@
+Employee recieves a salary of $5000 per month
+Employee receives to 24 days of paid leave per year.
+Employee wrok from the office on Monday and Tuesday
+Employee work from home on Wednesday, Thursday, and Friday.
+Employee receives $200 per year for GYM membership
+Employee have a 90 days notice period.
