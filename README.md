@@ -254,6 +254,34 @@ For a local Qdrant server, set `QDRANT_URL=http://localhost` and
 default to port `6333`. Each run recreates the `knowledge_filter` collection,
 so existing points in that collection are replaced.
 
+### Week 4: Qdrant RAG evaluation
+
+The `week4/rag_eva` project evaluates a Qdrant-backed RAG pipeline. It
+generates 384-dimensional embeddings with
+`all-MiniLM-L6-v2`, uploads the knowledge documents to Qdrant, retrieves
+relevant context, and evaluates the generated answers with Groq.
+
+Create `week4/rag_eva/.env` with:
+
+```env
+QDRANT_URL=https://your-cluster-id.region.aws.cloud.qdrant.io
+QDRANT_API_KEY=your_qdrant_api_key
+GROQ_API_KEY=your_groq_api_key
+```
+
+Run it from the project directory:
+
+```powershell
+cd week4/rag_eva
+uv sync
+$env:PYTHONIOENCODING="utf-8"
+uv run python .\rag_eva.py
+```
+
+The first run downloads the Sentence Transformers model from Hugging Face.
+Each run recreates the `rag_eval` collection and uploads the documents from
+`knowledge.json`.
+
 ### HireMeAI resume assistant
 
 HireMeAI is a full-stack project in `week2/hiremeai`. It parses the bundled
@@ -365,6 +393,13 @@ uv run python hello_llm.py
         └── uv.lock
     └── day15
         ├── fullQudrant.py
+        ├── knowledge.json
+        ├── README.md
+        ├── pyproject.toml
+        └── uv.lock
+└── week4
+    └── rag_eva
+        ├── rag_eva.py
         ├── knowledge.json
         ├── README.md
         ├── pyproject.toml
