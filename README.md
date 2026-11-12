@@ -36,6 +36,8 @@ The learning material is organized into weekly lessons.
 - **Week 3, Day 14:** Build a Qdrant-backed RAG pipeline that stores sentence
   embeddings, retrieves relevant employee-policy statements, and uses Groq to
   generate a grounded answer.
+- **Week 3, Day 15:** Extend the Qdrant RAG pipeline with JSON documents,
+  payload fields, keyword indexes, and category-filtered similarity search.
 
 Each day is an independent Python project with its own `pyproject.toml` and `uv.lock` file.
 
@@ -44,6 +46,7 @@ Each day is an independent Python project with its own `pyproject.toml` and `uv.
 - Python 3.11 or newer
 - [uv](https://docs.astral.sh/uv/)
 - A [Groq API key](https://console.groq.com/keys)
+- A Qdrant Cloud cluster and API key for days 14 and 15
 
 ## Setup
 
@@ -221,6 +224,36 @@ For a local Qdrant server, set `QDRANT_URL=http://localhost` and
 default to port `6333`. The script recreates the `knowledge` collection on
 each run and loads the documents from `knowledge.txt`.
 
+### Week 3, Day 15: Filtered Qdrant RAG
+
+The day 15 example loads structured employee-policy records from
+`knowledge.json`, stores their 384-dimensional embeddings in the
+`knowledge_filter` collection, and adds `text`, `category`, and `is_active`
+payload fields. It creates a keyword index for `category` and demonstrates a
+filtered search for reimbursement policies before running the final vacation
+question through Groq.
+
+Create `week3/day15/.env` with:
+
+```env
+QDRANT_URL=https://your-cluster-id.region.aws.cloud.qdrant.io
+QDRANT_API_KEY=your_qdrant_api_key
+GROQ_API_KEY=your_groq_api_key
+```
+
+Run it from the lesson directory:
+
+```bash
+cd week3/day15
+uv sync
+uv run python fullQudrant.py
+```
+
+For a local Qdrant server, set `QDRANT_URL=http://localhost` and
+`QDRANT_PORT=6333`. HTTPS Qdrant Cloud URLs default to port `443`; local URLs
+default to port `6333`. Each run recreates the `knowledge_filter` collection,
+so existing points in that collection are replaced.
+
 ### HireMeAI resume assistant
 
 HireMeAI is a full-stack project in `week2/hiremeai`. It parses the bundled
@@ -324,9 +357,15 @@ uv run python hello_llm.py
         ├── README.md
         ├── pyproject.toml
         └── uv.lock
-    └── day14
+    ├── day14
         ├── quadrant.py
         ├── knowledge.txt
+        ├── README.md
+        ├── pyproject.toml
+        └── uv.lock
+    └── day15
+        ├── fullQudrant.py
+        ├── knowledge.json
         ├── README.md
         ├── pyproject.toml
         └── uv.lock
