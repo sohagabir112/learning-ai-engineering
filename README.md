@@ -38,6 +38,8 @@ The learning material is organized into weekly lessons.
   generate a grounded answer.
 - **Week 3, Day 15:** Extend the Qdrant RAG pipeline with JSON documents,
   payload fields, keyword indexes, and category-filtered similarity search.
+- **Week 4, Agent:** Build a Groq tool-calling agent with Tavily web search
+  and safe basic arithmetic.
 
 Each day is an independent Python project with its own `pyproject.toml` and `uv.lock` file.
 
@@ -46,6 +48,7 @@ Each day is an independent Python project with its own `pyproject.toml` and `uv.
 - Python 3.11 or newer
 - [uv](https://docs.astral.sh/uv/)
 - A [Groq API key](https://console.groq.com/keys)
+- A [Tavily API key](https://app.tavily.com/) for the week 4 agent
 - A Qdrant Cloud cluster and API key for days 14 and 15
 
 ## Setup
@@ -281,6 +284,30 @@ uv run python .\rag_eva.py
 The first run downloads the Sentence Transformers model from Hugging Face.
 Each run recreates the `rag_eval` collection and uploads the documents from
 `knowledge.json`.
+
+### Week 4: Web search and math agent
+
+The `week4/agent` project is a single-file Groq agent with two tools. It uses
+Tavily for web searches and a safe expression evaluator for basic arithmetic.
+Groq automatically chooses the appropriate tool for each input.
+
+Create `week4/agent/.env` with:
+
+```env
+GROQ_API_KEY=your_groq_api_key
+TAVILY_API_KEY=your_tavily_api_key
+```
+
+Run it from the agent directory:
+
+```powershell
+cd week4/agent
+uv sync
+uv run python aiagent.py
+```
+
+Arithmetic answers use a simple format such as
+`(12 + 8) * 3 = 60`. Never commit the `.env` file or API keys.
 
 ### HireMeAI resume assistant
 
