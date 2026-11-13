@@ -40,6 +40,8 @@ The learning material is organized into weekly lessons.
   payload fields, keyword indexes, and category-filtered similarity search.
 - **Week 4, Agent:** Build a Groq tool-calling agent with Tavily web search
   and safe basic arithmetic.
+- **Week 4, LangGraph:** Build a conditional LangGraph workflow that doubles a
+  number until it reaches 100, then finishes.
 
 Each day is an independent Python project with its own `pyproject.toml` and `uv.lock` file.
 
@@ -309,6 +311,20 @@ uv run python aiagent.py
 Arithmetic answers use a simple format such as
 `(12 + 8) * 3 = 60`. Never commit the `.env` file or API keys.
 
+### Week 4: LangGraph conditional workflow
+
+The `week4/langChain` project demonstrates a small LangGraph state machine. It
+doubles the starting number while it is below 100, then transitions to a
+finishing node.
+
+Run it from the repository root:
+
+```powershell
+uv run --directory .\week4\langChain python .\langchain.py
+```
+
+The example starts with `5` and finishes with `160`.
+
 ### HireMeAI resume assistant
 
 HireMeAI is a full-stack project in `week2/hiremeai`. It parses the bundled
@@ -425,6 +441,16 @@ uv run python hello_llm.py
         ├── pyproject.toml
         └── uv.lock
 └── week4
+    ├── agent
+    │   ├── aiagent.py
+    │   ├── README.md
+    │   ├── pyproject.toml
+    │   └── uv.lock
+    ├── langChain
+    │   ├── langchain.py
+    │   ├── README.md
+    │   ├── pyproject.toml
+    │   └── uv.lock
     └── rag_eva
         ├── rag_eva.py
         ├── knowledge.json
