@@ -1,0 +1,28 @@
+[project]
+name = "restproject"
+version = "0.1.0"
+description = "Restaurant order-management agent built with LangGraph"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "langgraph>=0.2.0",
+    "langchain-groq>=1.1.0",
+    "langchain-core>=0.3.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.scripts]
+restproject = "restproject:main"
+
+[build-system]
+requires = ["uv_build>=0.13.7,<0.14.0"]
+build-backend = "uv_build"
+
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
