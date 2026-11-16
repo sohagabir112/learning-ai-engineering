@@ -42,6 +42,9 @@ The learning material is organized into weekly lessons.
   and safe basic arithmetic.
 - **Week 4, LangGraph:** Build a conditional LangGraph workflow that doubles a
   number until it reaches 100, then finishes.
+- **Week 5, Multiagent:** Compare a single Groq tool-calling agent with a
+  LangGraph system that coordinates dedicated web-search and calculator agents,
+  including token-usage tracking and persistent manager notes.
 
 Each day is an independent Python project with its own `pyproject.toml` and `uv.lock` file.
 
@@ -92,6 +95,7 @@ uv run python week2/day8/prompt_chaining.py
 uv run python week2/day9/streaming.py
 uv run python week3/day11/rag.py
 uv run python week3/day13/fullRag.py
+uv run --directory .\week5\multiagent python -m multiagent --mode compare
 ```
 
 Day 5 requires PDF or DOCX resumes in `week1/day5/reumse` and a local
@@ -325,6 +329,45 @@ uv run --directory .\week4\langChain python .\langchain.py
 
 The example starts with `5` and finishes with `160`.
 
+### Week 5: Single-agent and multi-agent comparison
+
+The `week5/multiagent` project compares two implementations for requests that
+combine current web data with calculations:
+
+- The single-agent system uses one Groq `ask_llm` function with Tavily web
+  search and a safe Python calculator, with a maximum of five attempts.
+- The LangGraph system uses a manager plus dedicated web-search and calculator
+  agents. The manager can persist useful context in `manager_notes.txt`.
+- Both systems record prompt, completion, total tokens, request counts, and
+  execution time. The comparison writes a detailed report to
+  `week5/multiagent/comparison_report.md`.
+
+Create `week5/multiagent/.env` with:
+
+```env
+GROQ_API_KEY=your_groq_api_key
+TAVILY_API_KEY=your_tavily_api_key
+GROQ_MODEL=openai/gpt-oss-120b
+```
+
+Run the benchmark from the repository root:
+
+```powershell
+uv run --directory .\week5\multiagent python -m multiagent --mode compare
+```
+
+You can also run one system directly:
+
+```powershell
+uv run --directory .\week5\multiagent python -m multiagent --mode single --query "What is 15 percent of 840?"
+uv run --directory .\week5\multiagent python -m multiagent --mode multi --query "What is 15 percent of 840?"
+```
+
+The default comparison query asks for current Apple and Microsoft market data,
+then calculates differences, percentages, growth projections, and a combined
+total. Market data changes over time, so token counts and generated answers may
+vary between runs.
+
 ### HireMeAI resume assistant
 
 HireMeAI is a full-stack project in `week2/hiremeai`. It parses the bundled
@@ -412,7 +455,7 @@ uv run python hello_llm.py
         ├── README.md
         ├── pyproject.toml
         └── uv.lock
-└── week3
+├── week3
     ├── day11
     │   ├── rag.py
     │   ├── README.md
@@ -440,7 +483,7 @@ uv run python hello_llm.py
         ├── README.md
         ├── pyproject.toml
         └── uv.lock
-└── week4
+├── week4
     ├── agent
     │   ├── aiagent.py
     │   ├── README.md
@@ -455,6 +498,15 @@ uv run python hello_llm.py
         ├── rag_eva.py
         ├── knowledge.json
         ├── README.md
+        ├── pyproject.toml
+        └── uv.lock
+└── week5
+    └── multiagent
+        ├── src/multiagent
+        ├── manager_notes.txt
+        ├── comparison_report.md
+        ├── README.md
+        ├── prompt.md
         ├── pyproject.toml
         └── uv.lock
 ```
