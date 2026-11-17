@@ -42,11 +42,17 @@ The learning material is organized into weekly lessons.
   and safe basic arithmetic.
 - **Week 4, LangGraph:** Build a conditional LangGraph workflow that doubles a
   number until it reaches 100, then finishes.
+- **Week 4, Restaurant Order Agent:** Build a LangGraph order-management
+  workflow that validates inventory, simulates cooking and serving, and
+  retries bounded failures.
 - **Week 5, Multiagent:** Compare a single Groq tool-calling agent with a
   LangGraph system that coordinates dedicated web-search and calculator agents,
   including token-usage tracking and persistent manager notes.
+- **Week 5, AI Proctor:** Detect code similarity with MOSS-style fingerprints
+  and analyze AI-generated code with structural heuristics and Groq.
 
-Each day is an independent Python project with its own `pyproject.toml` and `uv.lock` file.
+Each lesson or project is an independent Python project with its own
+`pyproject.toml` and, where applicable, `uv.lock` file.
 
 ## Requirements
 
@@ -329,6 +335,34 @@ uv run --directory .\week4\langChain python .\langchain.py
 
 The example starts with `5` and finishes with `160`.
 
+### Week 4: Restaurant order agent
+
+The `week4/restproject` project uses LangGraph to manage a restaurant order
+from customer intake through inventory confirmation, cooking, and serving.
+Each stage has bounded retries, and the in-memory inventory repository prevents
+orders from reserving unavailable stock.
+
+Create `week4/restproject/.env` with:
+
+```env
+GROQ_API_KEY=your_groq_api_key
+MODEL_NAME=openai/gpt-oss-120b
+```
+
+Run the interactive CLI from the project directory:
+
+```powershell
+cd week4/restproject
+uv sync
+uv run restproject
+```
+
+The project also includes an offline test suite:
+
+```powershell
+uv run pytest tests/ -v
+```
+
 ### Week 5: Single-agent and multi-agent comparison
 
 The `week5/multiagent` project compares two implementations for requests that
@@ -367,6 +401,35 @@ The default comparison query asks for current Apple and Microsoft market data,
 then calculates differences, percentages, growth projections, and a combined
 total. Market data changes over time, so token counts and generated answers may
 vary between runs.
+
+### Week 5: AI Proctor
+
+The `week5/aiproctor` project provides both a Streamlit dashboard and a CLI
+for code-integrity analysis. It compares submissions with MOSS-style
+winnowing fingerprints and Jaccard similarity, and combines structural
+heuristics with Groq analysis to identify AI-generated code patterns.
+
+Create `week5/aiproctor/.env` with:
+
+```env
+GROQ_API_KEY=your_groq_api_key
+```
+
+Install dependencies and launch the dashboard:
+
+```powershell
+cd week5/aiproctor
+uv sync
+uv run streamlit run src/aiproctor/app.py
+```
+
+Run CLI analysis against the bundled samples:
+
+```powershell
+uv run python -m aiproctor.cli plagiarism samples/student_a_sorting.py samples/student_b_sorting.py
+uv run python -m aiproctor.cli ai-detect samples/ai_generated_calculator.py
+uv run python -m aiproctor.cli full samples/student_a_sorting.py samples/student_b_sorting.py samples/student_c_sorting.py
+```
 
 ### HireMeAI resume assistant
 
@@ -494,6 +557,12 @@ uv run python hello_llm.py
     │   ├── README.md
     │   ├── pyproject.toml
     │   └── uv.lock
+    ├── restproject
+    │   ├── src/restproject
+    │   ├── tests
+    │   ├── README.md
+    │   ├── pyproject.toml
+    │   └── uv.lock
     └── rag_eva
         ├── rag_eva.py
         ├── knowledge.json
@@ -501,6 +570,12 @@ uv run python hello_llm.py
         ├── pyproject.toml
         └── uv.lock
 └── week5
+    ├── aiproctor
+    │   ├── samples
+    │   ├── src/aiproctor
+    │   ├── README.md
+    │   ├── pyproject.toml
+    │   └── uv.lock
     └── multiagent
         ├── src/multiagent
         ├── manager_notes.txt
