@@ -50,6 +50,13 @@ The learning material is organized into weekly lessons.
   including token-usage tracking and persistent manager notes.
 - **Week 5, AI Proctor:** Detect code similarity with MOSS-style fingerprints
   and analyze AI-generated code with structural heuristics and Groq.
+- **Week 5, Coding Agent:** Build a VS Code-style web IDE with Monaco editor,
+  integrated terminal, and an autonomous bug-fixing AI agent powered by Groq.
+- **Week 6, MCP Server:** Build Model Context Protocol (MCP) servers in Python
+  and TypeScript, including a custom calculator MCP tool with the official
+  Python MCP SDK and a production-grade email assistant (`email-drafter-mcp`)
+  with SQLite storage, 32 templates, English and Bangla drafting, and Claude
+  Desktop integration.
 
 Each lesson or project is an independent Python project with its own
 `pyproject.toml` and, where applicable, `uv.lock` file.
@@ -58,6 +65,7 @@ Each lesson or project is an independent Python project with its own
 
 - Python 3.11 or newer
 - [uv](https://docs.astral.sh/uv/)
+- [Node.js 20+](https://nodejs.org/) and npm (for the Week 6 TypeScript MCP server)
 - A [Groq API key](https://console.groq.com/keys)
 - A [Tavily API key](https://app.tavily.com/) for the week 4 agent
 - A Qdrant Cloud cluster and API key for days 14 and 15
@@ -102,6 +110,7 @@ uv run python week2/day9/streaming.py
 uv run python week3/day11/rag.py
 uv run python week3/day13/fullRag.py
 uv run --directory .\week5\multiagent python -m multiagent --mode compare
+uv run python week6/mcpserver/mcpserver.py
 ```
 
 Day 5 requires PDF or DOCX resumes in `week1/day5/reumse` and a local
@@ -431,6 +440,39 @@ uv run python -m aiproctor.cli ai-detect samples/ai_generated_calculator.py
 uv run python -m aiproctor.cli full samples/student_a_sorting.py samples/student_b_sorting.py samples/student_c_sorting.py
 ```
 
+### Week 6: Model Context Protocol (MCP) Server
+
+The `week6/mcpserver` directory covers building Model Context Protocol (MCP)
+servers with both Python and TypeScript:
+
+- **Python MCP Server (`mcpserver.py`):** Uses the official Python `mcp` SDK to
+  expose custom tool functionality (`Abir_calculator`):
+  ```powershell
+  cd week6/mcpserver
+  uv sync
+  uv run python mcpserver.py
+  ```
+  You can also inspect it interactively using the MCP CLI developer mode or
+  inspector:
+  ```powershell
+  uv run mcp dev mcpserver.py
+  ```
+
+- **TypeScript Email Drafter MCP Server (`email-drafter-mcp`):** A production-ready
+  MCP server built with TypeScript, `@modelcontextprotocol/sdk`, Zod, and SQLite.
+  It provides 18 tools, 4 resources, and 4 prompts for drafting, proofreading,
+  and managing emails for teachers, clients, and teammates in English and Bangla:
+  ```powershell
+  cd week6/mcpserver/email-drafter-mcp
+  npm install
+  npm run build
+  npm test
+  ```
+  Test interactively with the MCP Inspector:
+  ```powershell
+  npx @modelcontextprotocol/inspector node dist/index.js
+  ```
+
 ### HireMeAI resume assistant
 
 HireMeAI is a full-stack project in `week2/hiremeai`. It parses the bundled
@@ -569,10 +611,17 @@ uv run python hello_llm.py
         ├── README.md
         ├── pyproject.toml
         └── uv.lock
-└── week5
+├── week5
     ├── aiproctor
     │   ├── samples
     │   ├── src/aiproctor
+    │   ├── README.md
+    │   ├── pyproject.toml
+    │   └── uv.lock
+    ├── codingagent
+    │   ├── backend
+    │   ├── frontend
+    │   ├── sample_project
     │   ├── README.md
     │   ├── pyproject.toml
     │   └── uv.lock
@@ -584,6 +633,20 @@ uv run python hello_llm.py
         ├── prompt.md
         ├── pyproject.toml
         └── uv.lock
+└── week6
+    └── mcpserver
+        ├── mcpserver.py
+        ├── pyproject.toml
+        ├── README.md
+        ├── uv.lock
+        ├── src/mcpserver
+        └── email-drafter-mcp
+            ├── src/
+            ├── tests/
+            ├── data/
+            ├── package.json
+            ├── tsconfig.json
+            └── README.md
 ```
 
 ## Security
