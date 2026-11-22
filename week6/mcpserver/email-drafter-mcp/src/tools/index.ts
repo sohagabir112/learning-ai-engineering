@@ -1,0 +1,43 @@
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { DatabaseManager } from "../db.js";
+import { registerAddContactTool } from "./add_contact.js";
+import { registerCreateTemplateTool } from "./create_template.js";
+import { registerDeleteDraftTool } from "./delete_draft.js";
+import { registerDeleteTemplateTool } from "./delete_template.js";
+import { registerDraftCustomTool } from "./draft_custom.js";
+import { registerDraftFromTemplateTool } from "./draft_from_template.js";
+import { registerGetContactTool } from "./get_contact.js";
+import { registerGetDraftTool } from "./get_draft.js";
+import { registerGetProfileTool } from "./get_profile.js";
+import { registerGetTemplateTool } from "./get_template.js";
+import { registerListContactsTool } from "./list_contacts.js";
+import { registerListDraftsTool } from "./list_drafts.js";
+import { registerListTemplatesTool } from "./list_templates.js";
+import { registerProofreadCheckTool } from "./proofread_check.js";
+import { registerRewriteToneTool } from "./rewrite_tone.js";
+import { registerSaveDraftTool } from "./save_draft.js";
+import { registerSetProfileTool } from "./set_profile.js";
+import { registerUpdateDraftTool } from "./update_draft.js";
+import { registerUpdateTemplateTool } from "./update_template.js";
+
+export function registerAllTools(server: McpServer, db: DatabaseManager): void {
+  registerListTemplatesTool(server, db);
+  registerGetTemplateTool(server, db);
+  registerDraftFromTemplateTool(server, db);
+  registerDraftCustomTool(server, db);
+  registerRewriteToneTool(server);
+  registerCreateTemplateTool(server, db);
+  registerUpdateTemplateTool(server, db);
+  registerDeleteTemplateTool(server, db);
+  registerSaveDraftTool(server, db);
+  registerListDraftsTool(server, db);
+  registerGetDraftTool(server, db);
+  registerUpdateDraftTool(server, db);
+  registerDeleteDraftTool(server, db);
+  registerSetProfileTool(server, db);
+  registerGetProfileTool(server, db);
+  registerAddContactTool(server, db);
+  registerListContactsTool(server, db);
+  registerGetContactTool(server, db);
+  registerProofreadCheckTool(server);
+}
