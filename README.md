@@ -57,6 +57,12 @@ The learning material is organized into weekly lessons.
   Python MCP SDK and a production-grade email assistant (`email-drafter-mcp`)
   with SQLite storage, 32 templates, English and Bangla drafting, and Claude
   Desktop integration.
+- **Week 7, Order History Agent (Evals, Observability & Guardrails):** Build a
+  single-file electronics shop order-history agent with Groq (`openai/gpt-oss-120b`),
+  formatted terminal tables, request-level observability (`traces.jsonl` with
+  token counts, latency, and estimated cost), 3-layer guardrails (ownership
+  verification, strict off-topic refusal, and auto-termination on illegal
+  content), and a 10-case functional + adversarial evaluation suite (`eval.py`).
 
 Each lesson or project is an independent Python project with its own
 `pyproject.toml` and, where applicable, `uv.lock` file.
@@ -633,7 +639,7 @@ uv run python hello_llm.py
         ├── prompt.md
         ├── pyproject.toml
         └── uv.lock
-└── week6
+├── week6
     └── mcpserver
         ├── mcpserver.py
         ├── pyproject.toml
@@ -647,6 +653,14 @@ uv run python hello_llm.py
             ├── package.json
             ├── tsconfig.json
             └── README.md
+└── week7
+    ├── agent.py
+    ├── eval.py
+    ├── prompt.md
+    ├── pyproject.toml
+    ├── uv.lock
+    ├── traces.jsonl
+    └── README.md
 ```
 
 ## Security

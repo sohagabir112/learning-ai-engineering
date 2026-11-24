@@ -1,0 +1,13 @@
+[project]
+name = "electronics-shop-agent"
+version = "0.1.0"
+description = "A simple agent system for an electronics shop order history lookup"
+requires-python = ">=3.10"
+dependencies = [
+    "groq",
+    "python-dotenv",
+    "tabulate",
+]
+
+[project.scripts]
+agent = "agent:main"
